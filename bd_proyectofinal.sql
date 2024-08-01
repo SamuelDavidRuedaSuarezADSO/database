@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 01, 2024 at 10:35 PM
+-- Generation Time: Aug 01, 2024 at 11:07 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -64,8 +64,8 @@ CREATE TABLE `tb_clientes` (
 --
 
 INSERT INTO `tb_clientes` (`dni_client`, `nom_client`, `apell_client`, `direcc_client`, `telef_client`, `fecha_client`) VALUES
-(1, 'yesid', 'Pabon', 'calle27', 216456, '2024-07-11 17:51:02'),
-(2, 'Pepito', 'Perez', 'calle26', 313231313, '2024-07-11 17:50:27');
+(1102714658, 'Pepito', 'Perez', 'Calle 58', 321323333, '2024-08-01 17:55:20'),
+(1233331231, 'Daniel', 'Otero', 'AVD 56', 3213214543, '2024-08-01 18:00:21');
 
 -- --------------------------------------------------------
 
@@ -325,7 +325,7 @@ ALTER TABLE `tb_categoria`
 -- AUTO_INCREMENT for table `tb_clientes`
 --
 ALTER TABLE `tb_clientes`
-  MODIFY `dni_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=321654988;
+  MODIFY `dni_client` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1233331232;
 
 --
 -- AUTO_INCREMENT for table `tb_factura`

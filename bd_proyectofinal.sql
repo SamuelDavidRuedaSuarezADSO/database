@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 02, 2024 at 06:36 AM
+-- Generation Time: Aug 02, 2024 at 04:59 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -76,8 +76,7 @@ INSERT INTO `tb_clientes` (`dni_client`, `nom_client`, `apell_client`, `direcc_c
 
 CREATE TABLE `tb_factura` (
   `cod_factu` int NOT NULL,
-  `dni_client_fk` int NOT NULL,
-  `fecha_creacion_factu` datetime DEFAULT CURRENT_TIMESTAMP,
+  `fecha_creacion_factu` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_pedido_fk` int NOT NULL,
   `total_factu` decimal(10,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -121,33 +120,13 @@ CREATE TABLE `tb_mueble_pedido` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_operacion`
---
-
-CREATE TABLE `tb_operacion` (
-  `cod_opera` int NOT NULL,
-  `nom_opera` varchar(60) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `tb_operacion`
---
-
-INSERT INTO `tb_operacion` (`cod_opera`, `nom_opera`) VALUES
-(1, 'Eliminar'),
-(2, 'Agregar'),
-(3, 'Modificar'),
-(4, 'Listar');
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tb_pedido`
 --
 
 CREATE TABLE `tb_pedido` (
   `cod_pedido` int NOT NULL,
-  `cod_rol_fk` int NOT NULL
+  `cod_user_fk` int NOT NULL,
+  `dni_client_fk` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
@@ -168,30 +147,6 @@ CREATE TABLE `tb_rol` (
 INSERT INTO `tb_rol` (`cod_rol`, `nom_rol`) VALUES
 (1, 'admin'),
 (2, 'Empleados');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `tb_rol_operacion`
---
-
-CREATE TABLE `tb_rol_operacion` (
-  `cod_opera_fk` int NOT NULL,
-  `cod_rol_fk` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
---
--- Dumping data for table `tb_rol_operacion`
---
-
-INSERT INTO `tb_rol_operacion` (`cod_opera_fk`, `cod_rol_fk`) VALUES
-(1, 1),
-(2, 1),
-(3, 1),
-(4, 1),
-(2, 2),
-(3, 2),
-(4, 2);
 
 -- --------------------------------------------------------
 
@@ -239,8 +194,7 @@ ALTER TABLE `tb_clientes`
 --
 ALTER TABLE `tb_factura`
   ADD PRIMARY KEY (`cod_factu`),
-  ADD KEY `cod_pedido_fk` (`cod_pedido_fk`),
-  ADD KEY `dni_client_fk` (`dni_client_fk`);
+  ADD KEY `cod_pedido_fk` (`cod_pedido_fk`);
 
 --
 -- Indexes for table `tb_mueble`
@@ -257,30 +211,18 @@ ALTER TABLE `tb_mueble_pedido`
   ADD KEY `cod_pedido_fk` (`cod_pedido_fk`);
 
 --
--- Indexes for table `tb_operacion`
---
-ALTER TABLE `tb_operacion`
-  ADD PRIMARY KEY (`cod_opera`);
-
---
 -- Indexes for table `tb_pedido`
 --
 ALTER TABLE `tb_pedido`
   ADD PRIMARY KEY (`cod_pedido`),
-  ADD KEY `cod_rol_fk` (`cod_rol_fk`);
+  ADD KEY `dni_client_fk` (`dni_client_fk`),
+  ADD KEY `cod_user_fk` (`cod_user_fk`);
 
 --
 -- Indexes for table `tb_rol`
 --
 ALTER TABLE `tb_rol`
   ADD PRIMARY KEY (`cod_rol`);
-
---
--- Indexes for table `tb_rol_operacion`
---
-ALTER TABLE `tb_rol_operacion`
-  ADD KEY `cod_opera_fk` (`cod_opera_fk`),
-  ADD KEY `cod_rol_fk` (`cod_rol_fk`);
 
 --
 -- Indexes for table `tb_usuario`
@@ -318,12 +260,6 @@ ALTER TABLE `tb_mueble`
   MODIFY `cod_mueble` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `tb_operacion`
---
-ALTER TABLE `tb_operacion`
-  MODIFY `cod_opera` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
 -- AUTO_INCREMENT for table `tb_pedido`
 --
 ALTER TABLE `tb_pedido`
@@ -349,8 +285,7 @@ ALTER TABLE `tb_usuario`
 -- Constraints for table `tb_factura`
 --
 ALTER TABLE `tb_factura`
-  ADD CONSTRAINT `tb_factura_ibfk_1` FOREIGN KEY (`cod_pedido_fk`) REFERENCES `tb_pedido` (`cod_pedido`),
-  ADD CONSTRAINT `tb_factura_ibfk_2` FOREIGN KEY (`dni_client_fk`) REFERENCES `tb_clientes` (`dni_client`);
+  ADD CONSTRAINT `tb_factura_ibfk_1` FOREIGN KEY (`cod_pedido_fk`) REFERENCES `tb_pedido` (`cod_pedido`);
 
 --
 -- Constraints for table `tb_mueble`
@@ -369,14 +304,8 @@ ALTER TABLE `tb_mueble_pedido`
 -- Constraints for table `tb_pedido`
 --
 ALTER TABLE `tb_pedido`
-  ADD CONSTRAINT `tb_pedido_ibfk_1` FOREIGN KEY (`cod_rol_fk`) REFERENCES `tb_rol` (`cod_rol`);
-
---
--- Constraints for table `tb_rol_operacion`
---
-ALTER TABLE `tb_rol_operacion`
-  ADD CONSTRAINT `tb_rol_operacion_ibfk_1` FOREIGN KEY (`cod_opera_fk`) REFERENCES `tb_operacion` (`cod_opera`),
-  ADD CONSTRAINT `tb_rol_operacion_ibfk_2` FOREIGN KEY (`cod_rol_fk`) REFERENCES `tb_rol` (`cod_rol`);
+  ADD CONSTRAINT `tb_pedido_ibfk_2` FOREIGN KEY (`dni_client_fk`) REFERENCES `tb_clientes` (`dni_client`),
+  ADD CONSTRAINT `tb_pedido_ibfk_3` FOREIGN KEY (`cod_user_fk`) REFERENCES `tb_usuario` (`cod_user`);
 
 --
 -- Constraints for table `tb_usuario`

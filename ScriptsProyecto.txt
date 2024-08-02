@@ -23,19 +23,6 @@ CREATE TABLE tb_usuario(
     cod_rol_fk int not null,
     FOREIGN KEY (cod_rol_fk) REFERENCES tb_rol(cod_rol))
 
-CREATE TABLE tb_operacion(
-    cod_opera int PRIMARY KEY not null AUTO_INCREMENT,
-    nom_opera varchar(60) not null)
-
-CREATE TABLE tb_rol_operacion(
-    cod_opera_fk int not null,
-    cod_rol_fk int not null,
-	FOREIGN KEY (cod_opera_fk) REFERENCES tb_operacion(cod_opera),
-    FOREIGN KEY (cod_rol_fk) REFERENCES tb_rol(cod_rol))
-
-CREATE TABLE tb_color(
-    cod_color int PRIMARY KEY not null AUTO_INCREMENT,
-    nom_color varchar(60) not null)
 
 CREATE TABLE tb_categoria(
     cod_categ int NOT null PRIMARY KEY AUTO_INCREMENT,
@@ -52,16 +39,12 @@ CREATE TABLE tb_mueble(
     stok_mueble int not null,
     FOREIGN KEY (cod_categ_fk) REFERENCES tb_categoria(cod_categ))
 
-CREATE TABLE tb_mueble_color(
-    cod_mueble_fk int not null,
-    cod_color_fk int not null,
-    FOREIGN KEY (cod_mueble_fk) REFERENCES tb_mueble(cod_mueble),
-    FOREIGN KEY (cod_color_fk) REFERENCES tb_color(cod_color))
-
 CREATE TABLE tb_pedido(
     cod_pedido int not null PRIMARY KEY AUTO_INCREMENT,
-    cod_rol_fk int not null,
-    FOREIGN KEY (cod_rol_fk) REFERENCES tb_rol(cod_rol))
+    cod_user_fk int not null,
+    dni_client_fk int not null,
+    FOREIGN KEY (cod_user_fk) REFERENCES tb_usuario(cod_user),
+    FOREIGN KEY (dni_client_fk) REFERENCES tb_clientes(dni_client))
 
 CREATE TABLE tb_mueble_pedido(
     cod_mueble_fk int not null,
@@ -72,12 +55,10 @@ CREATE TABLE tb_mueble_pedido(
 
 CREATE TABLE tb_factura(
     cod_factu int not null PRIMARY KEY AUTO_INCREMENT,
-    dni_client_fk int not null,
-    fecha_creacion_factu DATATIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_creacion_factu TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     cod_pedido_fk int not null,
     total_factu DECIMAL(10, 2),
-    FOREIGN KEY (cod_pedido_fk) REFERENCES tb_pedido(cod_pedido),
-    FOREIGN KEY (dni_client_fk) REFERENCES tb_clientes(dni_client))
+    FOREIGN KEY (cod_pedido_fk) REFERENCES tb_pedido(cod_pedido))
 
 CREATE TABLE tb_clientes(
     dni_client int not null PRIMARY KEY,
@@ -88,6 +69,8 @@ CREATE TABLE tb_clientes(
 ALTER TABLE `tb_clientes` ADD `fecha_client` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `telef_client`;
 
 ALTER TABLE `tb_clientes` ADD `apell_client` VARCHAR(100) NULL AFTER `nom_client`;
+
+
 
 -----------------------------------------------------------------------------
 ------------------INSERSION DE DATOS-----------------------------------------

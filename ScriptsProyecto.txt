@@ -8,17 +8,6 @@ CREATE DATABASE bd_proyectofinal
 ------------------CREACION DE TABLAS----------------------------------
 ----------------------------------------------------------------------
 
-CREATE TABLE tb_tienda(
-    id_tienda int PRIMARY KEY NOT null AUTO_INCREMENT,
-    nom_tienda varchar(60) not null,
-    direcc_tienda varchar(60) not null,
-    ciudad_tienda varchar(60) not null,
-    depart_tienda varchar(60) not null,
-    pais_tienda varchar(60) not null,
-    telfon_tienda int,
-    cod_rol_fk int not null,
-    FOREIGN KEY (cod_rol_fk) REFERENCES tb_rol(cod_rol))
-
 CREATE TABLE tb_rol (
     cod_rol int not null PRIMARY KEY AUTO_INCREMENT,
     nom_rol varchar(60) not null)

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 01, 2024 at 11:07 PM
+-- Generation Time: Aug 02, 2024 at 06:36 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -64,6 +64,7 @@ CREATE TABLE `tb_clientes` (
 --
 
 INSERT INTO `tb_clientes` (`dni_client`, `nom_client`, `apell_client`, `direcc_client`, `telef_client`, `fecha_client`) VALUES
+(1, 'Ventas', 'Generales', 'Calle 45', 11111, '2024-08-01 20:17:05'),
 (1102714658, 'Pepito', 'Perez', 'Calle 58', 321323333, '2024-08-01 17:55:20'),
 (1233331231, 'Daniel', 'Otero', 'AVD 56', 3213214543, '2024-08-01 18:00:21');
 
@@ -102,7 +103,8 @@ CREATE TABLE `tb_mueble` (
 --
 
 INSERT INTO `tb_mueble` (`cod_mueble`, `nom_mueble`, `cod_categ_fk`, `mater_mueble`, `color_mueble`, `presi_mueble`, `stok_mueble`) VALUES
-(1, 'Cama KingZise', 4, 'Negro', 'Roble y Seda', '3000000.00', 10);
+(1, 'Cama KingSize', 4, 'Roble y Seda', 'Blanco', '3000000.00', 5),
+(2, 'Regadera Corona', 5, 'Cilicona', 'Gris - Metalico', '150000.00', 35);
 
 -- --------------------------------------------------------
 
@@ -194,23 +196,6 @@ INSERT INTO `tb_rol_operacion` (`cod_opera_fk`, `cod_rol_fk`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_tienda`
---
-
-CREATE TABLE `tb_tienda` (
-  `id_tienda` int NOT NULL,
-  `nom_tienda` varchar(60) NOT NULL,
-  `direcc_tienda` varchar(60) NOT NULL,
-  `ciudad_tienda` varchar(60) NOT NULL,
-  `depart_tienda` varchar(60) NOT NULL,
-  `pais_tienda` varchar(60) NOT NULL,
-  `telfon_tienda` int DEFAULT NULL,
-  `cod_rol_fk` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-
--- --------------------------------------------------------
-
---
 -- Table structure for table `tb_usuario`
 --
 
@@ -298,13 +283,6 @@ ALTER TABLE `tb_rol_operacion`
   ADD KEY `cod_rol_fk` (`cod_rol_fk`);
 
 --
--- Indexes for table `tb_tienda`
---
-ALTER TABLE `tb_tienda`
-  ADD PRIMARY KEY (`id_tienda`),
-  ADD KEY `cod_rol_fk` (`cod_rol_fk`);
-
---
 -- Indexes for table `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
@@ -358,12 +336,6 @@ ALTER TABLE `tb_rol`
   MODIFY `cod_rol` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT for table `tb_tienda`
---
-ALTER TABLE `tb_tienda`
-  MODIFY `id_tienda` int NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
@@ -405,12 +377,6 @@ ALTER TABLE `tb_pedido`
 ALTER TABLE `tb_rol_operacion`
   ADD CONSTRAINT `tb_rol_operacion_ibfk_1` FOREIGN KEY (`cod_opera_fk`) REFERENCES `tb_operacion` (`cod_opera`),
   ADD CONSTRAINT `tb_rol_operacion_ibfk_2` FOREIGN KEY (`cod_rol_fk`) REFERENCES `tb_rol` (`cod_rol`);
-
---
--- Constraints for table `tb_tienda`
---
-ALTER TABLE `tb_tienda`
-  ADD CONSTRAINT `tb_tienda_ibfk_1` FOREIGN KEY (`cod_rol_fk`) REFERENCES `tb_rol` (`cod_rol`);
 
 --
 -- Constraints for table `tb_usuario`

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 02, 2024 at 04:59 PM
+-- Generation Time: Aug 05, 2024 at 07:23 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -64,7 +64,6 @@ CREATE TABLE `tb_clientes` (
 --
 
 INSERT INTO `tb_clientes` (`dni_client`, `nom_client`, `apell_client`, `direcc_client`, `telef_client`, `fecha_client`) VALUES
-(1, 'Ventas', 'Generales', 'Calle 45', 11111, '2024-08-01 20:17:05'),
 (1102714658, 'Pepito', 'Perez', 'Calle 58', 321323333, '2024-08-01 17:55:20'),
 (1233331231, 'Daniel', 'Otero', 'AVD 56', 3213214543, '2024-08-01 18:00:21');
 
@@ -78,8 +77,19 @@ CREATE TABLE `tb_factura` (
   `cod_factu` int NOT NULL,
   `fecha_creacion_factu` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `cod_pedido_fk` int NOT NULL,
-  `total_factu` decimal(10,2) DEFAULT NULL
+  `total_factu` decimal(10,2) DEFAULT NULL,
+  `cambio_factu` double(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_factura`
+--
+
+INSERT INTO `tb_factura` (`cod_factu`, `fecha_creacion_factu`, `cod_pedido_fk`, `total_factu`, `cambio_factu`) VALUES
+(1, '2024-08-05 04:26:22', 1, '6450000.00', 550000.00),
+(2, '2024-08-05 04:43:09', 3, '6000000.00', 1000000.00),
+(3, '2024-08-05 05:27:51', 4, '6000000.00', 0.00),
+(4, '2024-08-05 05:29:35', 5, '9300000.00', 0.00);
 
 -- --------------------------------------------------------
 
@@ -103,7 +113,7 @@ CREATE TABLE `tb_mueble` (
 
 INSERT INTO `tb_mueble` (`cod_mueble`, `nom_mueble`, `cod_categ_fk`, `mater_mueble`, `color_mueble`, `presi_mueble`, `stok_mueble`) VALUES
 (1, 'Cama KingSize', 4, 'Roble y Seda', 'Blanco', '3000000.00', 5),
-(2, 'Regadera Corona', 5, 'Cilicona', 'Gris - Metalico', '150000.00', 35);
+(2, 'Regadera Corona', 5, 'Cilicona', 'Gris - Metalico', '150000.00', 21);
 
 -- --------------------------------------------------------
 
@@ -114,8 +124,22 @@ INSERT INTO `tb_mueble` (`cod_mueble`, `nom_mueble`, `cod_categ_fk`, `mater_mueb
 CREATE TABLE `tb_mueble_pedido` (
   `cod_mueble_fk` int NOT NULL,
   `cod_pedido_fk` int NOT NULL,
-  `cant_mueble` int NOT NULL
+  `cant_mueble` int NOT NULL,
+  `press_mueble` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_mueble_pedido`
+--
+
+INSERT INTO `tb_mueble_pedido` (`cod_mueble_fk`, `cod_pedido_fk`, `cant_mueble`, `press_mueble`) VALUES
+(1, 1, 2, '6000000.00'),
+(2, 1, 3, '450000.00'),
+(1, 2, 1, '3000000.00'),
+(1, 3, 2, '6000000.00'),
+(1, 4, 2, '6000000.00'),
+(1, 5, 3, '9000000.00'),
+(2, 5, 2, '300000.00');
 
 -- --------------------------------------------------------
 
@@ -126,8 +150,20 @@ CREATE TABLE `tb_mueble_pedido` (
 CREATE TABLE `tb_pedido` (
   `cod_pedido` int NOT NULL,
   `cod_user_fk` int NOT NULL,
-  `dni_client_fk` int NOT NULL
+  `dni_client_fk` int NOT NULL,
+  `total_pedido` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `tb_pedido`
+--
+
+INSERT INTO `tb_pedido` (`cod_pedido`, `cod_user_fk`, `dni_client_fk`, `total_pedido`) VALUES
+(1, 4, 1233331231, '6450000.00'),
+(2, 2, 1233331231, '3000000.00'),
+(3, 2, 1102714658, '6000000.00'),
+(4, 2, 1233331231, '6000000.00'),
+(5, 3, 1102714658, '9300000.00');
 
 -- --------------------------------------------------------
 
@@ -168,7 +204,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`cod_user`, `nom_user`, `email_user`, `contra_user`, `fecha_creaci_user`, `cod_rol_fk`) VALUES
-(1, 'admin', 'admin123@gmail.com', 'admin', '2024-07-29 22:46:01', 1),
+(1, 'admin', 'admin123@gmail.com', '1', '2024-07-29 22:46:01', 1),
 (2, 'Pedro Piedra', 'perdo@gmail.com', '123', '2024-07-29 22:46:14', 2),
 (3, 'daniel', 'daniel@gmail.com', '1234555', '2024-07-29 22:46:27', 2),
 (4, 'Samuel Rueda', 'sam@gmail.com', '123', '2024-07-29 22:47:54', 2);
@@ -251,7 +287,7 @@ ALTER TABLE `tb_clientes`
 -- AUTO_INCREMENT for table `tb_factura`
 --
 ALTER TABLE `tb_factura`
-  MODIFY `cod_factu` int NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_factu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tb_mueble`
@@ -263,7 +299,7 @@ ALTER TABLE `tb_mueble`
 -- AUTO_INCREMENT for table `tb_pedido`
 --
 ALTER TABLE `tb_pedido`
-  MODIFY `cod_pedido` int NOT NULL AUTO_INCREMENT;
+  MODIFY `cod_pedido` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tb_rol`
@@ -275,7 +311,7 @@ ALTER TABLE `tb_rol`
 -- AUTO_INCREMENT for table `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
-  MODIFY `cod_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `cod_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Constraints for dumped tables

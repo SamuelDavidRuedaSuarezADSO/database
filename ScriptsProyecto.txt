@@ -70,7 +70,11 @@ ALTER TABLE `tb_clientes` ADD `fecha_client` DATETIME NOT NULL DEFAULT CURRENT_T
 
 ALTER TABLE `tb_clientes` ADD `apell_client` VARCHAR(100) NULL AFTER `nom_client`;
 
+ALTER TABLE `tb_mueble_pedido` ADD `press_mueble` decimal(10,2) NOT NULL AFTER `cant_mueble`;
 
+ALTER TABLE `tb_pedido` ADD `total_pedido` DECIMAL(10,2) NOT NULL AFTER `dni_client_fk`;
+
+ALTER TABLE `tb_factura` ADD `cambio` DOUBLE(10,2) NOT NULL AFTER `total_factu`;
 
 -----------------------------------------------------------------------------
 ------------------INSERSION DE DATOS-----------------------------------------

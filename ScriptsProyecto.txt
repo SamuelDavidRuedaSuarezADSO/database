@@ -74,7 +74,7 @@ ALTER TABLE `tb_mueble_pedido` ADD `press_mueble` decimal(10,2) NOT NULL AFTER `
 
 ALTER TABLE `tb_pedido` ADD `total_pedido` DECIMAL(10,2) NOT NULL AFTER `dni_client_fk`;
 
-ALTER TABLE `tb_factura` ADD `cambio` DOUBLE(10,2) NOT NULL AFTER `total_factu`;
+ALTER TABLE `tb_factura` ADD `cambio_factu` DOUBLE(10,2) NOT NULL AFTER `total_factu`;
 
 -----------------------------------------------------------------------------
 ------------------INSERSION DE DATOS-----------------------------------------

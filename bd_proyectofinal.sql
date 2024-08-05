@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 05, 2024 at 07:23 AM
+-- Generation Time: Aug 05, 2024 at 07:54 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -112,8 +112,8 @@ CREATE TABLE `tb_mueble` (
 --
 
 INSERT INTO `tb_mueble` (`cod_mueble`, `nom_mueble`, `cod_categ_fk`, `mater_mueble`, `color_mueble`, `presi_mueble`, `stok_mueble`) VALUES
-(1, 'Cama KingSize', 4, 'Roble y Seda', 'Blanco', '3000000.00', 5),
-(2, 'Regadera Corona', 5, 'Cilicona', 'Gris - Metalico', '150000.00', 21);
+(1, 'Cama KingSize', 4, 'Roble y Seda', 'Blanco', '3000000.00', 15),
+(2, 'Regadera Corona', 5, 'Cilicona', 'Gris - Metalico', '150000.00', 25);
 
 -- --------------------------------------------------------
 
@@ -207,7 +207,8 @@ INSERT INTO `tb_usuario` (`cod_user`, `nom_user`, `email_user`, `contra_user`, `
 (1, 'admin', 'admin123@gmail.com', '1', '2024-07-29 22:46:01', 1),
 (2, 'Pedro Piedra', 'perdo@gmail.com', '123', '2024-07-29 22:46:14', 2),
 (3, 'daniel', 'daniel@gmail.com', '1234555', '2024-07-29 22:46:27', 2),
-(4, 'Samuel Rueda', 'sam@gmail.com', '123', '2024-07-29 22:47:54', 2);
+(4, 'Samuel Rueda', 'sam@gmail.com', '123', '2024-07-29 22:47:54', 2),
+(6, 'sam', 'sam@gmail.com', '123sam', '2024-08-05 19:45:48', 1);
 
 --
 -- Indexes for dumped tables
@@ -311,7 +312,7 @@ ALTER TABLE `tb_rol`
 -- AUTO_INCREMENT for table `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
-  MODIFY `cod_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cod_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables

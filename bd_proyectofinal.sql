@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 05, 2024 at 07:54 PM
+-- Generation Time: Aug 08, 2024 at 06:34 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -89,7 +89,11 @@ INSERT INTO `tb_factura` (`cod_factu`, `fecha_creacion_factu`, `cod_pedido_fk`, 
 (1, '2024-08-05 04:26:22', 1, '6450000.00', 550000.00),
 (2, '2024-08-05 04:43:09', 3, '6000000.00', 1000000.00),
 (3, '2024-08-05 05:27:51', 4, '6000000.00', 0.00),
-(4, '2024-08-05 05:29:35', 5, '9300000.00', 0.00);
+(4, '2024-08-05 05:29:35', 5, '9300000.00', 0.00),
+(17, '2024-08-08 01:04:34', 6, '6750000.00', 0.00),
+(18, '2024-08-08 01:05:37', 7, '300000.00', 50000.00),
+(19, '2024-08-08 01:07:19', 8, '6000000.00', 0.00),
+(21, '2024-08-08 01:10:43', 9, '6000000.00', 200050.00);
 
 -- --------------------------------------------------------
 
@@ -112,8 +116,8 @@ CREATE TABLE `tb_mueble` (
 --
 
 INSERT INTO `tb_mueble` (`cod_mueble`, `nom_mueble`, `cod_categ_fk`, `mater_mueble`, `color_mueble`, `presi_mueble`, `stok_mueble`) VALUES
-(1, 'Cama KingSize', 4, 'Roble y Seda', 'Blanco', '3000000.00', 15),
-(2, 'Regadera Corona', 5, 'Cilicona', 'Gris - Metalico', '150000.00', 25);
+(1, 'Cama KingSize', 4, 'Roble y Seda', 'Blanco', '3000000.00', 9),
+(2, 'Regadera Corona', 5, 'Cilicona', 'Gris - Metalico', '150000.00', 18);
 
 -- --------------------------------------------------------
 
@@ -139,7 +143,12 @@ INSERT INTO `tb_mueble_pedido` (`cod_mueble_fk`, `cod_pedido_fk`, `cant_mueble`,
 (1, 3, 2, '6000000.00'),
 (1, 4, 2, '6000000.00'),
 (1, 5, 3, '9000000.00'),
-(2, 5, 2, '300000.00');
+(2, 5, 2, '300000.00'),
+(1, 6, 2, '6000000.00'),
+(2, 6, 5, '750000.00'),
+(2, 7, 2, '300000.00'),
+(1, 8, 2, '6000000.00'),
+(1, 9, 2, '6000000.00');
 
 -- --------------------------------------------------------
 
@@ -163,7 +172,11 @@ INSERT INTO `tb_pedido` (`cod_pedido`, `cod_user_fk`, `dni_client_fk`, `total_pe
 (2, 2, 1233331231, '3000000.00'),
 (3, 2, 1102714658, '6000000.00'),
 (4, 2, 1233331231, '6000000.00'),
-(5, 3, 1102714658, '9300000.00');
+(5, 3, 1102714658, '9300000.00'),
+(6, 3, 1233331231, '6750000.00'),
+(7, 3, 1233331231, '300000.00'),
+(8, 2, 1102714658, '6000000.00'),
+(9, 3, 1102714658, '6000000.00');
 
 -- --------------------------------------------------------
 
@@ -288,7 +301,7 @@ ALTER TABLE `tb_clientes`
 -- AUTO_INCREMENT for table `tb_factura`
 --
 ALTER TABLE `tb_factura`
-  MODIFY `cod_factu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `cod_factu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `tb_mueble`
@@ -300,7 +313,7 @@ ALTER TABLE `tb_mueble`
 -- AUTO_INCREMENT for table `tb_pedido`
 --
 ALTER TABLE `tb_pedido`
-  MODIFY `cod_pedido` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cod_pedido` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `tb_rol`
